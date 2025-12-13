@@ -1,0 +1,106 @@
+TASK_TYPE: few_shot_action
+TRAIN:
+  ENABLE: false
+  DATASET_FEW: HMDB_few_shot
+  DATASET: Video_few_shot
+  META_BATCH: true  # meta or not
+  NUM_CLASSES: 70
+  WAY: 5
+  SHOT: 5
+  SHOT_TEST: 5
+  QUERY_PER_CLASS: 5
+  QUERY_PER_CLASS_TEST: 1
+  NUM_SAMPLES: 1000000
+  NUM_TRAIN_TASKS: 10000
+  NUM_TEST_TASKS: 10000
+  VAL_FRE_ITER: 500
+  BATCH_SIZE: 1 # Same with NUM_GPUS
+  BATCH_SIZE_PER_TASK: 1
+  CLASS_NAME: ['Apply Eye Makeup', 'Archery', 'Baby Crawling', 'Balance Beam', 'Band Marching', 'Baseball Pitch', 'Basketball', 'Basketball Dunk', 'Bench Press', 'Biking', 'Billiards', 'Blow DryHair', 'Body Weight Squats', 'Bowling', 'Boxing Punching Bag', 'Boxing Speed Bag', 'Breast Stroke', 'Brushing Teeth', 'Cricket Bowling', 'Drumming', 'Fencing', 'Field Hockey Penalty', 'Frisbee Catch', 'Front Crawl', 'Haircut', 'Hammering', 'Head Massage', 'Hula Hoop', 'Javelin Throw', 'Juggling Balls', 'Jumping Jack', 'Kayaking', 'Knitting', 'Long Jump', 'Lunges', 'Military Parade', 'Mixing', 'Mopping Floor', 'Nunchucks', 'Parallel Bars', 'Pizza Tossing', 'Playing Cello', 'Playing Dhol', 'Playing Flute', 'Playing Piano', 'Playing Sitar', 'Playing Tabla', 'Playing Violin', 'Pole Vault', 'Pull Ups', 'Push Ups', 'Rafting', 'Rope Climbing', 'Rowing', 'Shaving Beard', 'Skijet', 'Soccer Juggling', 'Soccer Penalty', 'Sumo Wrestling', 'Swing', 'Table Tennis Shot', 'Tai Chi', 'Throw Discus', 'Trampoline Jumping', 'Typing', 'Uneven Bars', 'Walking WithDog', 'Wall Pushups', 'Writing On Board', 'Yo Yo']
+  NUM_FOLDS: 1
+  START_EPOCH: 0
+  RANDOM_SEED: 0
+  KD_ALPHA: 6.0
+  CLS_ALPHA: 0.5
+  SIDE_CLS_ALPHA: 1.0
+  VIS_ALPHA: 1.0
+  KD_T: 10
+  LLM_train_json: './prompts/UCF101_train.json'
+  DC_ALPHA: 0.4
+
+TEMP_CLIP: 50.0
+TEMP_SIDE: 50.0
+
+AUGMENTATION:
+  COLOR_AUG: false
+  NO_RANDOM_ERASE: true
+  RANDOM_FLIP: true
+
+LSN:
+  EMBED_DIM: 256  
+  MLP_RATIO: 4.0
+  QKV_BIAS: true
+  QK_SCALE: null
+  DROP: 0.0
+  ATTN_DROP: 0.0
+  HIDDEN_DIM: 768
+  OUTPUT_DIM: 256
+  ADAPTER_DIM: 512
+  REDUCE_FACTOR: 3
+  GATE_T: 0.1
+  GATE_ALPHA: 0
+  SIDE_DROPOUT: 0
+  USE_GATE: learnable
+  REMOVE_PROJ: true
+  NUM_LAYERS: 12
+  TEMP_LAYERS: [6,8,10]
+  LOGITS_T: 4.0
+  DROPOUT: 0.7
+
+TEST:
+  ENABLE: true
+  DATASET: Video_few_shot
+  BATCH_SIZE: 1 # Same with NUM_GPUS
+  CLASS_NAME: ['Blowing Candles', 'Clean And Jerk', 'Cliff Diving', 'Cutting in Kitchen', 'Diving', 'Floor Gymnastics', 'Golf Swing', 'Handstand Walking', 'Horse Race', 'Ice Dancing', 'Jump Rope', 'Pommel Horse', 'Punch', 'Rock Climbing Indoor', 'Salsa Spin', 'Skiing', 'Sky Diving', 'Still Rings', 'Surfing', 'Tennis Swing', 'Volleyball Spiking']
+  USE_TEXT: true
+  LOAD_PRETRAIN: true
+  PRETRAIN_MODEL_PATH: './output/ucf101/5shot/best_checkpoint.pth'
+  FUSE_CLIP: 0.5
+  FUSE_VISION: 0.4
+  FUSE_SIDE: 0.1
+  LLM_test_json: './prompts/UCF101_test.json'
+
+DATA:
+  DATA_ROOT_DIR: /ROOT/DATA/
+  ANNO_DIR: ./configs/ucf101/
+  NUM_INPUT_FRAMES: 8
+  SAMPLING_RATE: 50
+  TRAIN_JITTER_SCALES: [256, 256]
+  TRAIN_CROP_SIZE: 224
+  MEAN: [0.48145466, 0.4578275, 0.40821073]
+  STD: [0.26862954, 0.26130258, 0.27577711]
+  TEST_CROP_SIZE: 224
+  TEST_SCALE: 256
+  TEST_CENTER_CROP: true
+  TARGET_FPS: 12
+  RES_ALPHA: 0.4
+
+LOG_PERIOD: 100
+SOLVER:
+  GENERATOR_LR: 0.00005
+  LSN_LR: 0.0001
+  LSNHEAD_LR: 0.0001
+  WEIGHT_DECAY: 0.1
+  OPTIM_METHOD: adamw
+  ADAPTER_ALPHA: 0.5
+
+VIDEO:
+  HEAD:
+    BACKBONE_NAME: "vit-b-16"
+  BACKBONE:
+    META_ARCH: Identity
+
+NUM_GPUS: 1
+OUTPUT_DIR: ./output/ucf101/5shot
+OUTPUT_DIR_SAVE: ./output/ucf101/5shot
+

@@ -8,7 +8,7 @@
   <a href="#">
     <img src="https://img.shields.io/badge/PAPER-PDF-A52A2A?style=flat-square&logo=adobeacrobatreader&logoColor=white&labelColor=555555" alt="Paper PDF">
   </a>
-  <a href="#">
+  <a href="./assets/poster.pdf">
     <img src="https://img.shields.io/badge/POSTER-PDF-2E8B57?style=flat-square&logo=adobeacrobatreader&logoColor=white&labelColor=555555" alt="Poster">
   </a>
   <a href="https://github.com/yaozhang0417/TS-FSAR">
@@ -33,16 +33,15 @@
 
 ## Project Structure
 
-> *Note: The <span style="color:#1e90ff;">model/</span> directory contains large pre-trained CLIP weights and is not included in this repository. You can download it from [here](https://drive.google.com/drive/folders/1oSdrD10AU1kwuyPdVTz5tN87QVNn2jod?usp=drive_link).*
+> Note: The `model/` directory contains large pre-trained CLIP weights and is not included in this repository. You can download it from [Baidu Cloud](https://pan.baidu.com/s/1De_AFTCbwaFnRpzwiikSrQ?pwd=278c) or [Google Drive](https://drive.google.com/drive/folders/1oSdrD10AU1kwuyPdVTz5tN87QVNn2jod?usp=drive_link). After downloading, place the vit-b-16 folder inside the `model/` directory.
 
 ```bash
 TS-FSAR/
 ├── assets/             # Figures for README
 ├── configs/            # Configuration files for different datasets
 ├── datasets/           # Episodic sampling and data augmentation 
-├── model/
-│   └── vit-b-16/       # Pre-trained CLIP weights and config files (ViT-B/16)
-├── prompts/            # LLM-generated class descriptions for different 
+├── model/              # Pre-trained CLIP weights and config files (ViT-B/16)
+├── prompts/            # LLM-generated class descriptions for different datasets
 ├── scripts/            # Shell scripts for training and testing
 ├── trainers/           # Core model architecture and method implementation
 ├── utils/              # Helper functions
@@ -58,7 +57,7 @@ TS-FSAR/
 > Hardware: Experiments were conducted using a single NVIDIA RTX 4090 GPU.  
 > *Note: We strongly recommend aligning your hardware and software environment with ours to ensure reproducibility.*
 
-Please create the same software environment as ours using the following commands:
+Please create the same software environment as ours using the following commands :
 
 ```bash
 conda create -n ts_fsar python=3.8
@@ -69,7 +68,7 @@ pip install -r requirements.txt
 ### Data Preparation
 >We support standard few-shot benchmarks including **SSv2-Full**, **SSv2-Small**, **Kinetics-100**, **HMDB51**, and **UCF101**.  
 > ***Note:** We adopt the data preparation pipeline and split settings from [CLIP-FSAR](https://github.com/alibaba-mmai-research/CLIP-FSAR).
-Please organize your datasets as follows:*
+Please organize your datasets as follows :*
 
 ```bash
 datapath/
@@ -101,6 +100,9 @@ datapath/
 
 ### Running
 
+> Before executing the scripts, please update the `DATA_ROOT_DIR` field in the corresponding YAML files under `configs/` to match the path of your local datasets.  
+Then you can run the code using the commands below :
+
 ```bash
 # Take SSv2_Full 1-shot as an example:
 # Training
@@ -114,7 +116,7 @@ sh metatest_full_1shot.sh
 
 ## Results
 
->This table reports the model’s classification performance on several standard video action recognition datasets. The best checkpoints for all datasets can be downloaded directly from [Here](https://drive.google.com/drive/folders/1qaZ7fGiuBgHUHNPPESj13VzHKqIMa1vw?usp=drive_link).
+>This table reports the model’s classification performance on several standard video action recognition datasets. The best checkpoints for all datasets can be downloaded directly from [Baidu Cloud](https://pan.baidu.com/s/1f2x2T7hptChLkAiyWJPLow?pwd=89ys) or [Google Drive](https://drive.google.com/drive/folders/13D_3JJrA5aJldsHKc-ldrOsRe-K4anW0?usp=drive_link).
 
 | Dataset | 5-way 1-shot | 5-way 5-shot |
 | :--- | :---: | :---: |
@@ -128,11 +130,11 @@ sh metatest_full_1shot.sh
 If you find this work useful, please consider citing:
 
 ```Bibtex
-@inproceedings{long2025taskspecific,
+@inproceedings{ts-fsar2026,
   title     = {Task-Specific Distance Correlation Matching for Few-Shot Action Recognition},
   author    = {Fei Long and Yao Zhang and Jiaming Lv and Jiangtao Xie and Peihua Li},
   booktitle = {The Fortieth AAAI Conference on Artificial Intelligence},
-  year      = {2025}
+  year      = {2026}
 }
 ```
 

@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  <a href="#">
+  <a href="https://arxiv.org/pdf/2512.11340">
     <img src="https://img.shields.io/badge/PAPER-PDF-A52A2A?style=flat-square&logo=adobeacrobatreader&logoColor=white&labelColor=555555" alt="Paper PDF">
   </a>
   <a href="./assets/poster.pdf">

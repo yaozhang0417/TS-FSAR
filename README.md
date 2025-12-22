@@ -17,7 +17,7 @@
 </p>
 
 
-> **Task-Specific Distance Correlation Matching for Few-Shot Action Recognition**
+> **Task-Specific Distance Correlation Matching for Few-Shot Action Recognition**[[Paper]](https://arxiv.org/pdf/2512.11340)).
 >
 > <p>
 > <em>
